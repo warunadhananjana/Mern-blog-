@@ -1,12 +1,14 @@
-import React, { useState } from 'react'
-import { DUMMY_POSTS } from '../data'
-import PostItem from '../components/PostItem'
-function AuthorPosts() {
-   const [posts, setPosts] = useState(DUMMY_POSTS)
+import React, { useState } from 'react';
+import PostItem from './PostItem';
+import { DUMMY_POSTS } from '../data';
+
+
+const Post = () => {
+  const [posts, setPosts] = useState(DUMMY_POSTS);
+
   return (
-   
-    <section className='author__posts'>
-     {posts.length> 0 ?<div className='container author_posts-container'>
+    <section className='posts'>
+     {posts.length> 0 ?<div className='container posts_container'>
          {posts.map(({ id, thumbnail, category, desc, authorID, title }) => (
         <PostItem
           key={id}
@@ -21,7 +23,7 @@ function AuthorPosts() {
      </div>
       :<h2 className='center'>No post founds</h2>}
     </section>
-  )
-}
+  );
+};
 
-export default AuthorPosts
+export default Post;
