@@ -3,6 +3,7 @@ import { DUMMY_POSTS } from '../data'
 import PostItem from '../components/PostItem'
 function AuthorPosts() {
    const [posts, setPosts] = useState(DUMMY_POSTS)
+   
   return (
    
     <section className='author__posts'>

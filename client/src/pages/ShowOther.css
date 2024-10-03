@@ -1,0 +1,73 @@
+/* General styling for cards */
+.card {
+    width: 18rem;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 10px;
+    margin-top: 70px;
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+}
+
+.card-body {
+    padding: 10px;
+}
+
+.card-title {
+    font-size: 1.2rem;
+}
+
+.card-text {
+    font-size: 1rem;
+    color: #555;
+}
+
+/* Responsive layout */
+.container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+.author-profile-img {
+    width: 65px !important;
+    /* Force width */
+    height: 65px !important;
+    /* Force height */
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 5px auto;
+    display: block;
+    border: 2px solid #ddd;
+    margin-right: 140px;
+}
+
+
+
+.list-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin-top: 10px;
+    width: 100%;
+    margin-left: 30px;
+}
+.author-text {
+    display: flex;
+    align-items: center;
+    color: #d6d4d4;
+    margin-right: 85px;
+}
+
+
+
+@media (max-width: 768px) {
+    .card {
+        width: 90%;
+        margin: 10px auto;
+    }
+}

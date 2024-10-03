@@ -15,11 +15,11 @@ import AuthorPosts from './pages/AuthorPosts';
 import Dashboard from './pages/Dashboard';
 import EditPost from './pages/EditPost';
 import Logout from './pages/Logout';
-
+import ShowOther from './pages/ShowOther';
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout />,
+    // element: <Layout />,
     errorElement: <ErrorPage />,
     children: [
       { index: true, element: <Home /> },
@@ -33,7 +33,8 @@ const router = createBrowserRouter([
       { path: "posts/user/:id", element: <AuthorPosts /> },
       { path: "myposts/:id", element: <Dashboard /> },
       { path: "posts/:id/edit", element: <EditPost /> },
-      { path: "logout", element: <Logout /> }
+      { path: "logout", element: <Logout /> },
+      { path: "showother", element: <ShowOther/> }
     ]
   }
 ]);

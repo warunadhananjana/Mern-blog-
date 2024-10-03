@@ -1,9 +1,7 @@
 import React from 'react'
-import { CgDetailsLess } from 'react-icons/cg'
 import PostAuthor from '../components/PostAuthor'
 import { Link } from 'react-router-dom'
 import Thumbnail from "../image/blog1.jpg";
-import { LoremIpsum } from 'lorem-ipsum';
 function PostDetails() {
   return (
     <section className='post-details'>
