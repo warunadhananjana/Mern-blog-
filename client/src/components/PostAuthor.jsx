@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import author1 from '../image/author1.jpg'
 function PostAuthor() {
   return (
-    <Link  className='post_author' to={`posts/users/sdfytr`}>
+    <Link  className='post_author' to={`showother`}>
       <div className='post_author-avatar'>
          <img src={author1} alt=''/>
       </div>

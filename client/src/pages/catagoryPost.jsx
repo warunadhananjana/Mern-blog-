@@ -1,8 +1,27 @@
-import React from 'react'
-
+import React, { useState } from 'react'
+import { DUMMY_POSTS } from '../data'
+import PostItem from '../components/PostItem'
 function catagoryPost() {
+   const [posts, setPosts] = useState(DUMMY_POSTS)
+   
   return (
-    <div>catagoryPost</div>
+   
+    <section className='posts'>
+     {posts.length> 0 ?<div className='container posts_container'>
+         {posts.map(({ id, thumbnail, category, desc, authorID, title }) => (
+        <PostItem
+          key={id}
+          postId={id} 
+          thumbnail={thumbnail}
+          category={category}
+          desc={desc}
+          authorID={authorID}
+          title={title}
+        />
+      ))}
+     </div>
+      :<h2 className='center'>No post founds</h2>}
+    </section>
   )
 }
 

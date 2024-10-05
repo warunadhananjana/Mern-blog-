@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import PostAuthor from './PostAuthor';
 
 const PostItem = ({ postId, thumbnail, category, desc, authorID, title }) => {
-  const shortDescription = desc.length > 145 ? desc.substr(0,145) + '....' : desc;
+  const shortDescription = desc.length > 140 ? desc.substr(0,140) + '....' : desc;
   const postTitle = title.length > 30 ? title.substr(0, 30) + '....' : title;
 
   return (
@@ -12,7 +12,7 @@ const PostItem = ({ postId, thumbnail, category, desc, authorID, title }) => {
         <img src={thumbnail} alt={title}/>
       </div>
       <div className='post_content'>
-        <Link to={`/posts/${postId}`}>
+        <Link to={`post/:id`}>
           <h3>{postTitle}</h3>
         </Link>
         <p>{shortDescription}</p>

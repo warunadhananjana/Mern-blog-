@@ -19,7 +19,7 @@ import ShowOther from './pages/ShowOther';
 const router = createBrowserRouter([
   {
     path: "/",
-    // element: <Layout />,
+    element: <Layout />,
     errorElement: <ErrorPage />,
     children: [
       { index: true, element: <Home /> },
