@@ -32,7 +32,7 @@ const Login = () => {
           placeholder='Email Address' 
           name='email' 
           value={userData.email} 
-          onChange={changeInputHandler} 
+          onChange={changeInputHandler} autoFocus 
         />
 
         {/* Input for password */}

@@ -4,11 +4,11 @@ import Avatar1 from '../image/author1.jpg';
 import Avatar2 from '../image/author2.jpg';
 import Avatar3 from '../image/author3.jpg';
 import Avatar4 from '../image/author4.jpg';
-import './Authors.css';
+
 
 const authorsData = [
   { id: 1, avatar: Avatar2, name: 'Ernest Achiver', post: 2 },
-  { id: 2, avatar: Avatar1, name: 'Jone Doe', post: 3 },
+  { id: 2, avatar: Avatar1, name: 'Jone Doe senanayaka', post: 3 },
   { id: 3, avatar: Avatar3, name: 'Dramani Mahama', post: 1 },
   { id: 4, avatar: Avatar4, name: 'Nana Addo', post: 4 },
 ];
@@ -20,7 +20,7 @@ const Authors = () => {
     <div>
       <section className='authors'>
         {authors.length > 0 ? (
-          <div className='container authors_container'>
+          <div className='container1 authors_container'>
             {authors.map(({ id, avatar, name, post }) => (
               <Link key={id} to={`/posts/users/${id}` } className='author'>
                 <div className='author_avatar'>
