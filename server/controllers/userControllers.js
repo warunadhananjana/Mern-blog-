@@ -5,6 +5,10 @@
  const User = require('../models/userModel')
  const HttpError = require("../models/errorModel")
  const jwt = require("jsonwebtoken")
+ const fs = require('fs')
+ const path = require('path')
+ const {v4: uuid} =require("uuid")
+ 
  const registerUser = async (req, res, next) => {
    try {
       const {name,email, password , password2} = req.body;
@@ -68,7 +72,17 @@
  // POST : api/users/: id
  //PROTECTED
  const getUser = async (req, res, next) => {
-    res.json(" User profile")
+    try {
+      const {id} = req.params;
+      const user = await User.findById(id).select('-password');
+      if(!user) {
+         return next(new HttpError("User not found." ,404))
+      }
+      res.status(200).json(user);
+      
+    } catch (error) {
+      return next(new HttpError(error));
+    }
  }
 
 
@@ -77,7 +91,43 @@
  // POST : api/users/change-avatar
  //PROTECTED
  const changeAvatar = async (req, res, next) => {
-    res.json("Change User avatar")
+     try {
+       if(!req.files.avatar){
+         return next(new HttpError('please chose an image', 422))
+       }
+       //find user from database
+       const user = await User.findById(req.user.id)
+      // delete old avatar if exit
+      if(user.avatar){
+         fs.unlink(path.join(__dirname,'..', 'uploads', user.avatar), (err) =>{
+            if(err){
+               return next(new HttpError(err))
+            }
+         } )
+      }
+      const {avatar} = req.files;
+      //check file size
+      if(avatar.size > 500000){
+         return next(new HttpError("profile pitcher too big. Shoud be less than 500kb"), 422)
+      }
+      let fileName;
+      fileName = avatar.name;
+      let splittedfilename = fileName.plit('.')
+      let newFilename = splittedfilename[0] + uuid() + '.' +splittedfilename[splittedfilename.length -1] 
+      avatar.mv(path.join(__dirname,'..', 'uploads', newFilename), async (err) =>{
+         if(err){
+            return next(new HttpError(err))
+         }
+
+         const updatedAvatar = await User.findByIdAndUpdate(req.user.id, {avatar: newFilename},{new: true})
+         if(!updatedAvatar){
+            return next(new HttpError(), 422 )
+         }
+         res.status(200).json(updatedAvatar)
+      })
+     } catch (error) {
+       return next(new HttpError(error))
+     }
  }
 
 //======== EDIT USER DETAILS (from profile)
@@ -92,7 +142,12 @@
 // POST : api/users/authors
 //UNPROTECTED
  const getAuthors = async (req, res, next) => {
-    res.json("Get all users/authors")
+    try {
+       const authors = await User.find().select('-password');
+       res.json(authors);
+    } catch (error) {
+       return next(new HttpError(error))
+    }
  }
 
 
