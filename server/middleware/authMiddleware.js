@@ -2,11 +2,11 @@ const jwt = require('jsonwebtoken');
 const HttpError = require('../models/errorModel');
 
 const authMiddleware = async (req, res, next) => {
-    const authorizationHeader = req.headers.Authorization || req.headers.authorization; // Check for both uppercase and lowercase headers
+    const Authorization = req.headers.Authorization || req.headers.authorization; // Check for both uppercase and lowercase headers
 
-    if (authorizationHeader && authorizationHeader.startsWith('Bearer')) {
+    if (Authorization && Authorization.startsWith('Bearer')) {
         // Extract token by splitting on space, not an empty string
-        const token = authorizationHeader.split(' ')[1]; 
+        const token = Authorization.split(' ')[1]; 
 
         jwt.verify(token, process.env.JWT_SECRET, (err, info) => {
             if (err) {
