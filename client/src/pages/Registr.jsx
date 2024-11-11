@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const Registr = () => {
   const [userData, setUserData] = useState({
@@ -8,6 +9,8 @@ const Registr = () => {
     password: '',
     password2: ''
   });
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   // Change handler for input fields
   const changeInputHandler = (e) => {
@@ -18,15 +21,38 @@ const Registr = () => {
     }));
   };
 
+  // Register user function
+  const registerUser = async (e) => {
+    e.preventDefault();
+    setError(''); // Reset error message initially
+    try {
+      const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/users/register`, userData);
+      const newUser = response.data;
+  
+      if (!newUser) {
+        setError("Couldn't register user. Please try again.");
+        return;
+      }
+  
+      console.log(newUser);
+      navigate('/'); // Navigate if registration is successful
+    } catch (err) {
+      const errorMessage = err.response?.data?.message || 'An error occurred during registration.';
+      setError('');  // Temporary clear to force state update
+      setError(errorMessage);
+    }
+  };
+  
+
   return (
     <section className='register'>
       <div className='container'>
         <h2>Sign Up</h2>
       </div>
 
-      <form className='form register_form'>
+      <form className='form register_form' onSubmit={registerUser}>
         {/* Error message */}
-        <p className='form_error-message'>This is an error message</p>
+        {error && <p className='form_error-message'>{error}</p>}
 
         {/* Input for full name */}
         <input 

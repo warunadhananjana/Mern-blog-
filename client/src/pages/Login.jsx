@@ -1,19 +1,38 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { UserContext } from '../context/userContext';
 
 const Login = () => {
   const [userData, setUserData] = useState({
     email: '',
     password: '',
   });
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
+
+  const { setCurrentUser } = useContext(UserContext);
 
   // Change handler for input fields
   const changeInputHandler = (e) => {
     const { name, value } = e.target;
     setUserData((prevState) => ({
       ...prevState,
-      [name]: value
+      [name]: value,
     }));
+  };
+
+  const loginUser = async (e) => {
+    e.preventDefault();
+    setError('');
+    try {
+      const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/users/login`, userData);
+      const user = response.data;
+      setCurrentUser(user);
+      navigate('/');
+    } catch (err) {
+      setError(err.response?.data?.message || 'An error occurred. Please try again.');
+    }
   };
 
   return (
@@ -22,36 +41,37 @@ const Login = () => {
         <h2>Sign in</h2>
       </div>
 
-      <form className='form login_form'>
+      <form className='form login_form' onSubmit={loginUser}>
         {/* Error message */}
-        <p className='form_error-message'>This is an error message</p>
+        {error && <p className='form_error-message'>{error}</p>}
 
         {/* Input for email */}
-        <input 
-          type='email' 
-          placeholder='Email Address' 
-          name='email' 
-          value={userData.email} 
-          onChange={changeInputHandler} autoFocus 
+        <input
+          type='email'
+          placeholder='Email Address'
+          name='email'
+          value={userData.email}
+          onChange={changeInputHandler}
+          autoFocus
         />
 
         {/* Input for password */}
-        <input 
-          type='password' 
-          placeholder='Password' 
-          name='password' 
-          value={userData.password} 
-          onChange={changeInputHandler} 
+        <input
+          type='password'
+          placeholder='Password'
+          name='password'
+          value={userData.password}
+          onChange={changeInputHandler}
         />
-
-       
 
         {/* Submit button */}
         <button type='submit' className='btn primary'>
           Login
         </button>
       </form>
-      <small className='sign_in'>Dont't have an account? <Link to='/register'>Register</Link></small>
+      <small className='sign_in'>
+        Don't have an account? <Link to='/register'>Register</Link>
+      </small>
     </section>
   );
 };

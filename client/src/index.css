@@ -422,7 +422,8 @@ footer {
 .post-details_buttons {
     display: flex;
     gap: 1rem;
-    margin-left: 300px;
+    margin-left: 50px;
+    margin-top: 20px;
 }
 
 .post-detail_container h1 {
@@ -965,6 +966,33 @@ input:focus {
 .form button:hover {
     background-color: #004bb5;
 }
+/*Button */
+.post-details_buttons .btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px; /* Adjust as needed */
+    min-width: 80px;    /* Ensures consistent width */
+    height: 40px;       /* Ensures consistent height */
+    font-size: 14px;
+    text-decoration: none;
+  }
+  
+  .btn.sm {
+    font-size: 14px;
+    padding: 8px 16px;  /* Adjust for size consistency */
+  }
+  
+  .btn.primary {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .btn.danger {
+    background-color: #dc3545;
+    color: white;
+  }
+  
 
 /* Error message styling */
 .form__error-message {
@@ -1211,3 +1239,18 @@ input:focus {
     grid-template-columns: 1fr;
     gap: 1.2rem;
 }
+
+.loader{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    display: grid;
+    place-items: center;
+    background: var(--color-bg);
+}
+ .loader__image{
+    width: 4.5rem;
+    aspect-ratio: 1/1;
+ }

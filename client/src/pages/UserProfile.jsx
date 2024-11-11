@@ -65,7 +65,7 @@ const UserProfile = () => {
               value={confirmNewPassword} 
               onChange={e => setConfirmNewPassword(e.target.value)} 
             />
-            <button type='submit' style={{width:'200px'}} className='btn primary'>Update my details</button>
+            <button type='submit' style={{width:'177px'}} className='btn primary'>Update my details</button>
           </form>
         </div>
       </div>
